@@ -1,8 +1,12 @@
 import win32gui
+"""
+Python script to save song titles currently being played on VLC for OBS and Twitch streaming. Only has support for VLC at
+the moment.
+"""
 
 def stringFinder():
-    songTitle = "No song is being played!"
-    vlcStorage = []
+    songTitle = "No song is being played!" #Default response.
+    vlcStorage = [] #Stores all of the windows that get enumerated.
     def enumWindowsProc(hwnd,lParam):
         g = win32gui.GetWindowText(hwnd)
         vlcStorage.append(g)
@@ -10,7 +14,7 @@ def stringFinder():
     for title in vlcStorage:
         if "VLC media player" in title:
             songTitle = title
-            songTitle = songTitle.replace("- VLC media player","")
+            songTitle = songTitle.replace("- VLC media player","") #Formatting the songs to be of the required form.
             songTitle = songTitle.replace("VLC media player","")
             songTitle = songTitle.replace(".mp3","")
             songTitle = songTitle.replace(".flac","")
@@ -23,7 +27,7 @@ def stringFinder():
 def txtStorage(songName):
     file = open("Music.txt","w")
     file.write(songName)
-    file.truncate()
+    file.truncate() #Truncate is used to get rid of the text.
 
     
 def main():
@@ -42,7 +46,7 @@ def main():
                 initialTitle = newTitle
                 
         
-    except KeyboardInterrupt:
+    except KeyboardInterrupt: #CTRL-C exits the program.
             pass
             
             

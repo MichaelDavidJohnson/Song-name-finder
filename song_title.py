@@ -49,7 +49,7 @@ def stringFinder():
 
 
 def txtStorage(songName):
-    with open('Music.txt','w') as file:
+    with open('Music.txt','w',encoding ='utf8') as file:
         file.write(songName)
         
 
